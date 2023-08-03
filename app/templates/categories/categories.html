@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Categories
+{% endblock %}
+
+{% block content %}
+
+<nav class="titulo">
+    <h1>
+        <a href="{{ url_for('home.cerrar') }}" class="bpr bpr-ed"> Regresar</a>
+        Categories Page</h1></nav>
+
+    <h2>Lista de Categorias</h2>
+    <a href="{{ url_for('cat.catn') }}" class="bpr bpr-ac">Nueva Categoria</a>
+    <nav class="a-table">
+
+        <table id="sale">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+       
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cat in categories %}
+                <tr>
+                    <td>{{ cat.id_categoria }}</td>
+                    <td>{{ cat.nombre }}</td>
+                    <td>
+                        <a href="{{ url_for('cat.cate', id_categoria=cat.id_categoria) }}">
+                            <i class="fa fa-refresh"></i> 
+                        </a> 
+                        <form method="post" action="{{ url_for('cat.delete_cat', id_categoria=cat.id_categoria) }}">
+                            <button type="submit"
+                            onclick="return confirm('¿seguro de borrar este objeto?')" class="fa">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</nav>
+{% endblock %}
